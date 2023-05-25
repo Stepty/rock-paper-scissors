@@ -78,30 +78,36 @@ const paper_results = document.createElement('div');
 const scissors_results = document.createElement('div');
 const score_display = document.querySelector('.score_display');
 const score_count = document.querySelector('.score_count');
+const computer_score_count = document.querySelector('.computer_score_count');
+const computer_score_display = document.querySelector('.computer_score');
 
-let score = 0;
+let player_score = 0;
+let computer_score = 0;
 
 
 // rock results 
 const rock = document.querySelector('#rock');
 
 rock.addEventListener('click', () => {
-    removeAllChildNodes(results_display);
-    if (score === 5)
+    if (player_score === 5 || computer_score === 5)
     {
         return 0;
     }
+    removeAllChildNodes(results_display);
     let results = singleRound("rock", getComputerChoice());
     if (results === "You Win! Rock beats Scissors")
     {
         rock_results.textContent = "You Win! Rock beats Scissors";
-        score++;
-        score_count.textContent = score;
+        player_score++;
+        score_count.textContent = player_score;
         score_display.appendChild(score_count);
     }
     else if (results === "You Lose! Paper beats Rock")
     {
         rock_results.textContent = "You Lose! Paper beats Rock";
+        computer_score++;
+        computer_score_count.textContent = computer_score;
+        computer_score_display.appendChild(computer_score_count);
     }
     else 
     {
@@ -114,22 +120,25 @@ rock.addEventListener('click', () => {
 const paper = document.querySelector('#paper');
 
 paper.addEventListener('click', () => {
-    removeAllChildNodes(results_display);
-    if (score === 5)
+    if (player_score === 5 || computer_score === 5)
     {
         return 0;
     }
+    removeAllChildNodes(results_display);
     let results = singleRound("paper", getComputerChoice());
     if (results === "You Win! Paper beats Rock")
     {
         paper_results.textContent = "You Win! Paper beats Rock";
-        score++;
-        score_count.textContent = score;
+        player_score++;
+        score_count.textContent = player_score;
         score_display.appendChild(score_count);
     }
     else if (results === "You Lose! Scissors beats Paper")
     {
         paper_results.textContent = "You Lose! Scissors beats Paper";
+        computer_score++;
+        computer_score_count.textContent = computer_score;
+        computer_score_display.appendChild(computer_score_count);
     }
     else 
     {
@@ -143,22 +152,25 @@ paper.addEventListener('click', () => {
 const scissors = document.querySelector('#scissors');
 
 scissors.addEventListener('click', () => {
-    removeAllChildNodes(results_display);
-    if (score === 5)
+    if (player_score === 5 || computer_score === 5)
     {
         return 0;
     }
+    removeAllChildNodes(results_display);
     let results = singleRound("scissors", getComputerChoice());
     if (results === "You Win! Scissors beats Paper")
     {
         scissors_results.textContent = "You Win! Scissors beats Paper";
-        score++;
-        score_count.textContent = score;
+        player_score++;
+        score_count.textContent = player_score;
         score_display.appendChild(score_count);
     }
     else if (results === "You Lose! Rock beats Scissors")
     {
         scissors_results.textContent = "You Lose! Rock beats Scissors";
+        computer_score++;
+        computer_score_count.textContent = computer_score;
+        computer_score_display.appendChild(computer_score_count);
     }
     else 
     {
@@ -171,9 +183,13 @@ scissors.addEventListener('click', () => {
 const reset = document.querySelector('#reset');
 
 reset.addEventListener('click', () => {
-    if (score === 5) {
-        score = 0;
-        score_count.textContent = score;
+    if (player_score === 5 || computer_score === 5) {
+        player_score = 0;
+        score_count.textContent = player_score;
         score_display.appendChild(score_count);
+
+        computer_score = 0;
+        computer_score_count.textContent = computer_score;
+        computer_score_display.appendChild(computer_score_count);
     }
 });
